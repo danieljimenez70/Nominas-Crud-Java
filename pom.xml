@@ -15,6 +15,7 @@
   </properties>
 
   <dependencies>
+
     <!-- API de Servlets para Tomcat 9 -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -37,6 +38,13 @@
       <artifactId>mariadb-java-client</artifactId>
       <version>3.5.3</version>
     </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
   </dependencies>
 
   <build>
