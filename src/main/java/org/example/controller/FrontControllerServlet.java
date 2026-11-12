@@ -1,20 +1,14 @@
 package org.example.controller;
-import org.example.command.nomina.*;
+
 import org.example.command.Command;
-import org.example.command.InicioCommand;
-import org.example.command.empleado.ActualizarEmpleadoCommand;
-import org.example.command.empleado.EliminarEmpleadoCommand;
-import org.example.command.empleado.InsertarEmpleadoCommand;
-import org.example.command.empleado.ListarEmpleadosCommand;
-import org.example.command.empleado.*;
+import org.example.command.CommandFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebServlet("/app/*")
 public class FrontControllerServlet extends HttpServlet {
@@ -22,20 +16,11 @@ public class FrontControllerServlet extends HttpServlet {
     private static final String PREFIJO_REDIRECT = "redirect:";
     private static final String CARPETA_VISTAS = "/WEB-INF/views/";
 
-    // Provisional: en el paso 4 esto pasa a una CommandFactory
-    private final Map<String, Command> comandos = new HashMap<>();
+    private CommandFactory commandFactory;
 
     @Override
     public void init() {
-        comandos.put("/inicio", new InicioCommand());
-        comandos.put("/empleados/listar", new ListarEmpleadosCommand());
-        comandos.put("/empleados/insertar", new InsertarEmpleadoCommand());
-        comandos.put("/empleados/actualizar", new ActualizarEmpleadoCommand());
-        comandos.put("/empleados/eliminar", new EliminarEmpleadoCommand());
-        comandos.put("/nominas/listar", new ListarNominasCommand());
-        comandos.put("/nominas/insertar", new InsertarNominaCommand());
-        comandos.put("/nominas/actualizar", new ActualizarNominaCommand());
-        comandos.put("/nominas/eliminar", new EliminarNominaCommand());
+        commandFactory = new CommandFactory();
     }
 
     @Override
@@ -56,7 +41,7 @@ public class FrontControllerServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         String ruta = req.getPathInfo();
-        Command comando = (ruta == null) ? null : comandos.get(ruta);
+        Command comando = (ruta == null) ? null : commandFactory.crear(ruta);
 
         if (comando == null) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Ruta no encontrada: " + ruta);
