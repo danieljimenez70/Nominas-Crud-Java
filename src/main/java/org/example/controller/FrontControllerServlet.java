@@ -1,5 +1,5 @@
 package org.example.controller;
-
+import org.example.command.nomina.*;
 import org.example.command.Command;
 import org.example.command.InicioCommand;
 import org.example.command.empleado.ActualizarEmpleadoCommand;
@@ -32,6 +32,10 @@ public class FrontControllerServlet extends HttpServlet {
         comandos.put("/empleados/insertar", new InsertarEmpleadoCommand());
         comandos.put("/empleados/actualizar", new ActualizarEmpleadoCommand());
         comandos.put("/empleados/eliminar", new EliminarEmpleadoCommand());
+        comandos.put("/nominas/listar", new ListarNominasCommand());
+        comandos.put("/nominas/insertar", new InsertarNominaCommand());
+        comandos.put("/nominas/actualizar", new ActualizarNominaCommand());
+        comandos.put("/nominas/eliminar", new EliminarNominaCommand());
     }
 
     @Override
