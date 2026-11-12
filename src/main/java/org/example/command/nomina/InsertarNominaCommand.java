@@ -1,8 +1,9 @@
 package org.example.command.nomina;
 
 import org.example.command.Command;
-import org.example.dao.NominaDAO;
 import org.example.model.Nomina;
+import org.example.service.NominaService;
+import org.example.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,14 +11,20 @@ import java.math.BigDecimal;
 
 public class InsertarNominaCommand implements Command {
 
-    private final NominaDAO nominaDAO = new NominaDAO();
+    private final NominaService nominaService = new NominaService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String dni = request.getParameter("dni");
-        BigDecimal sueldo = new BigDecimal(request.getParameter("sueldo"));
+        try {
+            String dni = request.getParameter("dni");
+            BigDecimal sueldo = new BigDecimal(request.getParameter("sueldo"));
 
-        nominaDAO.insertar(new Nomina(dni, sueldo));
+            nominaService.insertar(new Nomina(dni, sueldo));
+        } catch (ServiceException e) {
+            request.getSession().setAttribute("error", e.getMessage());
+        } catch (NumberFormatException e) {
+            request.getSession().setAttribute("error", "El sueldo introducido no es válido");
+        }
         return "redirect:/app/nominas/listar";
     }
 }
