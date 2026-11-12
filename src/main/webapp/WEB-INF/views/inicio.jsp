@@ -17,7 +17,7 @@
         <section class="panel">
             <h2>Gestión de empleados</h2>
             <p>Registra, consulta, modifica y elimina empleados.</p>
-            <a href="${pageContext.request.contextPath}/empleados">
+            <a href="${pageContext.request.contextPath}/app/empleados/listar">
                 <button type="button">Gestionar empleados</button>
             </a>
         </section>

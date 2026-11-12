@@ -2,7 +2,11 @@ package org.example.controller;
 
 import org.example.command.Command;
 import org.example.command.InicioCommand;
-
+import org.example.command.empleado.ActualizarEmpleadoCommand;
+import org.example.command.empleado.EliminarEmpleadoCommand;
+import org.example.command.empleado.InsertarEmpleadoCommand;
+import org.example.command.empleado.ListarEmpleadosCommand;
+import org.example.command.empleado.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +28,10 @@ public class FrontControllerServlet extends HttpServlet {
     @Override
     public void init() {
         comandos.put("/inicio", new InicioCommand());
+        comandos.put("/empleados/listar", new ListarEmpleadosCommand());
+        comandos.put("/empleados/insertar", new InsertarEmpleadoCommand());
+        comandos.put("/empleados/actualizar", new ActualizarEmpleadoCommand());
+        comandos.put("/empleados/eliminar", new EliminarEmpleadoCommand());
     }
 
     @Override
