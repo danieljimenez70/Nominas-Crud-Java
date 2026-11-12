@@ -1,18 +1,18 @@
 package org.example.command.empleado;
 
 import org.example.command.Command;
-import org.example.dao.EmpleadoDAO;
+import org.example.service.EmpleadoService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ListarEmpleadosCommand implements Command {
 
-    private final EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+    private final EmpleadoService empleadoService = new EmpleadoService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        request.setAttribute("empleados", empleadoDAO.listar());
+        request.setAttribute("empleados", empleadoService.listar());
         return "empleados";
     }
 }

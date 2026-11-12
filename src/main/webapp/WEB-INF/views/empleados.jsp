@@ -20,6 +20,12 @@
         </div>
         <a class="enlace-cabecera" href="${ctx}/app/inicio">← Volver al inicio</a>
     </header>
+        <c:if test="${not empty error}">
+            <div style="background:#fde8e8; color:#9b1c1c; border:1px solid #f5b5b5;
+                        padding:12px 16px; border-radius:8px; margin-bottom:16px;">
+                <c:out value="${error}"/>
+            </div>
+        </c:if>
 
     <section class="panel">
         <div class="titulo-panel">

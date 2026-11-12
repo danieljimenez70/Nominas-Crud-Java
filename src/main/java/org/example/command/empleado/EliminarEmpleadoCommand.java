@@ -1,18 +1,23 @@
 package org.example.command.empleado;
 
 import org.example.command.Command;
-import org.example.dao.EmpleadoDAO;
+import org.example.service.EmpleadoService;
+import org.example.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class EliminarEmpleadoCommand implements Command {
 
-    private final EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+    private final EmpleadoService empleadoService = new EmpleadoService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        empleadoDAO.eliminar(request.getParameter("dni"));
+        try {
+            empleadoService.eliminar(request.getParameter("dni"));
+        } catch (ServiceException e) {
+            request.getSession().setAttribute("error", e.getMessage());
+        }
         return "redirect:/app/empleados/listar";
     }
 }
