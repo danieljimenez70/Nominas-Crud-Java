@@ -25,7 +25,7 @@
         <section class="panel">
             <h2>Gestión de nóminas</h2>
             <p>Consulta y calcula las nóminas de los empleados.</p>
-            <a href="${pageContext.request.contextPath}/nominas">
+               <a href="${pageContext.request.contextPath}/app/nominas/listar">
                 <button type="button">Gestionar nóminas</button>
             </a>
         </section>
