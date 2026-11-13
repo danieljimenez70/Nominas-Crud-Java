@@ -37,3 +37,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Proyecto Nominas ###
+target/
+.idea/
+src/main/resources/db.properties
