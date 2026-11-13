@@ -1,0 +1,8 @@
+org.example.command
+org.example.command.empleado
+org.example.command.nomina
+org.example.controller
+org.example.dao
+org.example.model
+org.example.service
+org.example.util
