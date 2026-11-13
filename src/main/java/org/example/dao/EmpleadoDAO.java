@@ -17,7 +17,7 @@ public class EmpleadoDAO {
 
         String sql = "SELECT dni, nombre, sexo, categoria, anyos FROM empleados";
 
-        try (Connection conexion = ConexionBD.conectar();
+        try (Connection conexion = ConexionBD.getInstance().getConexion();
              PreparedStatement ps = conexion.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -40,7 +40,7 @@ public class EmpleadoDAO {
     public Empleado buscarPorDni(String dni) throws SQLException {
         String sql = "SELECT dni, nombre, sexo, categoria, anyos FROM empleados WHERE dni = ?";
 
-        try (Connection conexion = ConexionBD.conectar();
+        try (Connection conexion = ConexionBD.getInstance().getConexion();
              PreparedStatement ps = conexion.prepareStatement(sql)) {
 
             ps.setString(1, dni);
@@ -64,7 +64,7 @@ public class EmpleadoDAO {
     public boolean insertar(Empleado empleado) throws SQLException {
         String sql = "INSERT INTO empleados (dni, nombre, sexo, categoria, anyos) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conexion = ConexionBD.conectar();
+        try (Connection conexion = ConexionBD.getInstance().getConexion();
              PreparedStatement ps = conexion.prepareStatement(sql)) {
 
             ps.setString(1, empleado.getDni());
@@ -80,7 +80,7 @@ public class EmpleadoDAO {
     public boolean actualizar(Empleado empleado) throws SQLException {
         String sql = "UPDATE empleados SET nombre = ?, sexo = ?, categoria = ?, anyos = ? WHERE dni = ?";
 
-        try (Connection conexion = ConexionBD.conectar();
+        try (Connection conexion = ConexionBD.getInstance().getConexion();
              PreparedStatement ps = conexion.prepareStatement(sql)) {
 
             ps.setString(1, empleado.getNombre());
@@ -96,7 +96,7 @@ public class EmpleadoDAO {
     public boolean eliminar(String dni) throws SQLException {
         String sql = "DELETE FROM empleados WHERE dni = ?";
 
-        try (Connection conexion = ConexionBD.conectar();
+        try (Connection conexion = ConexionBD.getInstance().getConexion();
              PreparedStatement ps = conexion.prepareStatement(sql)) {
 
             ps.setString(1, dni);

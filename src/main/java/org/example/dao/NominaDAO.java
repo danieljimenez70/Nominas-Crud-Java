@@ -17,7 +17,7 @@ public class NominaDAO {
 
         String sql = "SELECT dni, sueldo FROM nominas";
 
-        try (Connection conexion = ConexionBD.conectar();
+        try (Connection conexion = ConexionBD.getInstance().getConexion();
              PreparedStatement ps = conexion.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -35,7 +35,7 @@ public class NominaDAO {
     public Nomina buscarPorDni(String dni) throws SQLException {
         String sql = "SELECT dni, sueldo FROM nominas WHERE dni = ?";
 
-        try (Connection conexion = ConexionBD.conectar();
+        try (Connection conexion = ConexionBD.getInstance().getConexion();
              PreparedStatement ps = conexion.prepareStatement(sql)) {
 
             ps.setString(1, dni);
@@ -56,7 +56,7 @@ public class NominaDAO {
     public boolean insertar(Nomina nomina) throws SQLException {
         String sql = "INSERT INTO nominas (dni, sueldo) VALUES (?, ?)";
 
-        try (Connection conexion = ConexionBD.conectar();
+        try (Connection conexion = ConexionBD.getInstance().getConexion();
              PreparedStatement ps = conexion.prepareStatement(sql)) {
 
             ps.setString(1, nomina.getDni());
@@ -69,7 +69,7 @@ public class NominaDAO {
     public boolean actualizar(Nomina nomina) throws SQLException {
         String sql = "UPDATE nominas SET sueldo = ? WHERE dni = ?";
 
-        try (Connection conexion = ConexionBD.conectar();
+        try (Connection conexion = ConexionBD.getInstance().getConexion();
              PreparedStatement ps = conexion.prepareStatement(sql)) {
 
             ps.setBigDecimal(1, nomina.getSueldo());
@@ -82,7 +82,7 @@ public class NominaDAO {
     public boolean eliminar(String dni) throws SQLException {
         String sql = "DELETE FROM nominas WHERE dni = ?";
 
-        try (Connection conexion = ConexionBD.conectar();
+        try (Connection conexion = ConexionBD.getInstance().getConexion();
              PreparedStatement ps = conexion.prepareStatement(sql)) {
 
             ps.setString(1, dni);
